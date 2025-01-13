@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
-import CheckoutForm from '@/components/CheckoutForm';
+import CheckoutForm from '@/components/CheckOutForm';
 import Navigation from '@/components/Navigation';
 
 export default function CheckoutPage() {
