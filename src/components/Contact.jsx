@@ -20,6 +20,7 @@ import {
   DialogTitle, 
   DialogTrigger 
 } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -109,12 +110,12 @@ const Contact = () => {
         </div>
       )}
 
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 max-w-full overflow-x-hidden">
         <h2 className="text-3xl font-bold text-center mb-12">Get in Touch</h2>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
           {/* Contact Methods */}
-          <Card>
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Contact Information</CardTitle>
             </CardHeader>
@@ -122,21 +123,22 @@ const Contact = () => {
               {contactMethods.map((method) => (
                 <div 
                   key={method.label}
-                  className="flex items-center justify-between"
+                  className="flex flex-col xs:flex-row items-start xs:items-center justify-between space-y-2 xs:space-y-0 gap-2"
                 >
-                  <div className="flex items-center gap-4">
-                    <method.icon className="w-6 h-6 text-emerald-600" />
-                    <div>
+                  <div className="flex items-center gap-4 w-full">
+                    <method.icon className="w-6 h-6 text-emerald-600 shrink-0" />
+                    <div className="flex-1 overflow-hidden">
                       <p className="text-sm text-muted-foreground">{method.label}</p>
-                      <p className="font-medium">{method.value}</p>
+                      <p className="font-medium truncate max-w-full">{method.value}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 self-end xs:self-auto">
                     <Button 
                       variant="outline" 
                       size="icon"
                       onClick={() => handleCopy(method.value)}
                       title="Copy"
+                      className="shrink-0"
                     >
                       {copiedMethod === method.value ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     </Button>
@@ -156,7 +158,7 @@ const Contact = () => {
           </Card>
 
           {/* Contact Form */}
-          <Card>
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Send Us a Message</CardTitle>
             </CardHeader>
@@ -205,9 +207,63 @@ const Contact = () => {
           </Card>
         </div>
 
-        {/* Quick Contact Dialog */}
+        {/* Mobile Quick Contact Sheet */}
+        <Sheet>
+          <SheetTrigger asChild className="fixed bottom-4 right-4 z-40 md:hidden">
+            <Button size="icon" className="rounded-full shadow-lg w-12 h-12">
+              <Send className="w-5 h-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Quick Contact</SheetTitle>
+            </SheetHeader>
+            <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+              <div className="space-y-2">
+                <Label htmlFor="sheet-name">Name</Label>
+                <Input
+                  id="sheet-name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Your Name"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="sheet-email">Email</Label>
+                <Input
+                  id="sheet-email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="sheet-message">Message</Label>
+                <Textarea
+                  id="sheet-message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Your message here..."
+                  rows={4}
+                />
+              </div>
+              <Button type="submit" className="w-full">
+                <Send className="mr-2 w-4 h-4" /> Send Message
+              </Button>
+            </form>
+          </SheetContent>
+        </Sheet>
+
+        {/* Desktop Quick Contact Dialog */}
         <Dialog>
-          <DialogTrigger asChild className="fixed bottom-4 right-4 z-40">
+          <DialogTrigger asChild className="fixed bottom-4 right-4 z-40 max-md:hidden">
             <Button size="lg" className="rounded-full shadow-lg">
               <Send className="mr-2 w-5 h-5" /> Quick Contact
             </Button>
@@ -218,9 +274,9 @@ const Contact = () => {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="quick-name">Name</Label>
+                <Label htmlFor="dialog-name">Name</Label>
                 <Input
-                  id="quick-name"
+                  id="dialog-name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
@@ -229,9 +285,9 @@ const Contact = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="quick-email">Email</Label>
+                <Label htmlFor="dialog-email">Email</Label>
                 <Input
-                  id="quick-email"
+                  id="dialog-email"
                   name="email"
                   type="email"
                   value={formData.email}
@@ -241,9 +297,9 @@ const Contact = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="quick-message">Message</Label>
+                <Label htmlFor="dialog-message">Message</Label>
                 <Textarea
-                  id="quick-message"
+                  id="dialog-message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}

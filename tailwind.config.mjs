@@ -56,24 +56,34 @@ const config = {
 		  sm: 'calc(var(--radius) - 4px)'
 		},
 		animation: {
-		  'spin-slow': 'spin 20s linear infinite',
-		  'wave': 'wave 10s linear infinite',
-		  'wave-slow': 'wave 15s linear infinite',
-		  'float': 'float 6s ease-in-out infinite',
-		},
-		keyframes: {
-		  wave: {
-			'0%': { backgroundPosition: '0 0' },
-			'100%': { backgroundPosition: '1000px 0' },
+			'spin-slow': 'spin 20s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			'wave': 'wave 10s cubic-bezier(0.45, 0, 0.55, 1) infinite',
+			'wave-slow': 'wave 15s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			'float': 'float 6s cubic-bezier(0.45, 0, 0.55, 1) alternate infinite',
+			'vertical-drift': 'vertical-drift 8s ease-in-out infinite alternate',
 		  },
-		  float: {
-			'0%, 100%': { transform: 'translate(0, 0)' },
-			'50%': { transform: 'translate(0, -20px)' },
+		  keyframes: {
+			wave: {
+				'0%': { backgroundPosition: '0 0' },
+				'100%': { backgroundPosition: '0 -200px' }, // Moves vertically upwards
+			  },
+			float: {
+			  '0%, 100%': { transform: 'translate(0, 0)' },
+			  '50%': { transform: 'translate(0, -20px)' },
+			},
+			'vertical-drift': {
+			  '0%': { transform: 'translateY(0)' },
+			  '50%': { transform: 'translateY(-15px)' },
+			  '100%': { transform: 'translateY(0)' }
+			},
+			spin: {
+			  '0%': { transform: 'rotate(0deg)' },
+			  '100%': { transform: 'rotate(360deg)' }
+			}
 		  }
 		}
-	  }
-	},
-	plugins: [require("tailwindcss-animate")],
+	  },
+	  plugins: [require("tailwindcss-animate")],
   };
-  
+	
   export default config;

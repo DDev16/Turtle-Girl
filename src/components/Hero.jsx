@@ -62,9 +62,8 @@ const Hero = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-emerald-800/50 to-transparent" />
         
-        {/* Animated water ripple effect */}
-        <div className="absolute inset-0 bg-[url('/ripple.png')] bg-repeat-x bg-bottom opacity-30 animate-wave" />
-        <div className="absolute inset-0 bg-[url('/ripple.png')] bg-repeat-x bg-bottom opacity-20 animate-wave-slow" />
+        {/* Animated bubble effect */}
+        {/* <div className="absolute inset-0 bg-[url('/bubble.png')] bg-repeat-x bg-bottom opacity-30 animate-wave" /> */}
       </motion.div>
 
       {/* Main Container - Using Grid for Better Layout */}

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -51,24 +52,25 @@ const Footer = () => {
 
   return (
     <footer className="bg-emerald-50 py-12">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-4 md:px-6 max-w-full overflow-x-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
-          <Card className="bg-transparent border-none shadow-none">
+          <Card className="bg-transparent border-none shadow-none w-full">
             <CardHeader className="p-0 mb-4">
-              <CardTitle className="text-emerald-900">Turtle Girl</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-emerald-900 text-xl">Turtle Girl</CardTitle>
+              <CardDescription className="text-sm">
                 Handcrafted jewelry inspired by the beauty of nature and the spirit of the ocean.
               </CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2">
                 {socialLinks.map((social) => (
                   <Button
                     key={social.label}
                     variant="outline"
                     size="icon"
                     asChild
+                    className="shrink-0"
                   >
                     <Link
                       href={social.href}
@@ -85,9 +87,9 @@ const Footer = () => {
           </Card>
 
           {/* Quick Links */}
-          <Card className="bg-transparent border-none shadow-none">
+          <Card className="bg-transparent border-none shadow-none w-full">
             <CardHeader className="p-0 mb-4">
-              <CardTitle className="text-emerald-900">Quick Links</CardTitle>
+              <CardTitle className="text-emerald-900 text-xl">Quick Links</CardTitle>
             </CardHeader>
             <CardContent className="p-0 space-y-2">
               {quickLinks.map((link) => (
@@ -95,7 +97,7 @@ const Footer = () => {
                   key={link.href}
                   variant="link"
                   asChild
-                  className="text-emerald-800 hover:text-emerald-600"
+                  className="text-emerald-800 hover:text-emerald-600 w-full justify-start"
                 >
                   <Link href={link.href}>
                     {link.label}
@@ -106,21 +108,21 @@ const Footer = () => {
           </Card>
 
           {/* Newsletter Signup */}
-          <Card>
+          <Card className="w-full">
             <CardHeader>
-              <CardTitle>Stay Connected</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-xl">Stay Connected</CardTitle>
+              <CardDescription className="text-sm">
                 Subscribe to our newsletter for exclusive updates
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex w-full max-w-sm items-center space-x-2">
-                <input
+              <div className="flex flex-col sm:flex-row w-full items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                <Input
                   type="email"
-                  placeholder="Email"
-                  className="flex-1 rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  placeholder="Enter your email"
+                  className="w-full sm:flex-1"
                 />
-                <Button type="submit">Subscribe</Button>
+                <Button type="submit" className="w-full sm:w-auto">Subscribe</Button>
               </div>
             </CardContent>
           </Card>
@@ -133,7 +135,7 @@ const Footer = () => {
           <p className="text-sm text-emerald-800">
             © {currentYear} Turtle Girl. All rights reserved.
           </p>
-          <div className="mt-2 space-x-4 text-sm">
+          <div className="mt-2 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm">
             <Button
               variant="link"
               asChild
